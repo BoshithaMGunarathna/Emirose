@@ -3,7 +3,9 @@ const serviceService = require('../services/serviceService');
 exports.createService = async (req, res) => {
     try {
         console.log(req.body);
-        const { Name, Description, Image } = req.body;
+        const { Name, Description } = req.body;
+
+        const Image = req.file ? req.file.filename : null;
 
         if (!Name || !Description || !Image) {
             return res.status(400).json({ error: "Name, Description, and Image are required." });
