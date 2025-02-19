@@ -1,6 +1,6 @@
 const serviceHasThingsService = require('../services/serviceHasSubService');
 
-exports.createServiceHasThing = async (req, res) => {
+exports.createServiceHasSub = async (req, res) => {
     try {
         const { Service_idService, SubServices } = req.body;
 
@@ -11,7 +11,7 @@ exports.createServiceHasThing = async (req, res) => {
 
         const createdSubServices = [];
         for (const name of SubServices) {
-            const serviceHasThing = await serviceHasThingsService.createServiceHasThing({ Name: name, Service_idService });
+            const serviceHasThing = await serviceHasThingsService.createServiceHasSub({ Name: name, Service_idService });
             createdSubServices.push(serviceHasThing);
         }
 
@@ -22,9 +22,9 @@ exports.createServiceHasThing = async (req, res) => {
 };
 
 
-exports.getAllServiceHasThings = async (req, res) => {
+exports.getAllServiceHasSub = async (req, res) => {
     try {
-        const serviceHasThings = await serviceHasThingsService.getAllServiceHasThings(req.params.serviceId);
+        const serviceHasThings = await serviceHasThingsService.getAllServiceHasSub(req.params.serviceId);
         if (!serviceHasThings.length) {
             return res.status(404).json({ message: "No Service Has Things found for this service." });
         }
@@ -35,9 +35,9 @@ exports.getAllServiceHasThings = async (req, res) => {
 };
 
 
-exports.getServiceHasThingById = async (req, res) => {
+exports.getServiceHasSubById = async (req, res) => {
     try {
-        const serviceHasThing = await serviceHasThingsService.getServiceHasThingById(req.params.id);
+        const serviceHasThing = await serviceHasThingsService.getServiceHasSubById(req.params.id);
         if (!serviceHasThing) {
             return res.status(404).json({ message: "Service Has Thing not found." });
         }
@@ -48,9 +48,9 @@ exports.getServiceHasThingById = async (req, res) => {
 };
 
 //single update
-exports.updateServiceHasThing = async (req, res) => {
+exports.updateServiceHasSub = async (req, res) => {
     try {
-        const updatedServiceHasThing = await serviceHasThingsService.updateServiceHasThing(req.params.id, req.body);
+        const updatedServiceHasThing = await serviceHasThingsService.updateServiceHasSub(req.params.id, req.body);
         if (!updatedServiceHasThing) {
             return res.status(404).json({ message: "Service Has Thing not found." });
         }
@@ -62,7 +62,7 @@ exports.updateServiceHasThing = async (req, res) => {
 
 
 //bulk update
-exports.updateBulkServiceHasThings = async (req, res) => {
+exports.updateBulkServiceHasSub = async (req, res) => {
     try {
         const { serviceId } = req.params;
         const serviceHasThingsArray = req.body.serviceHasThings;
@@ -74,7 +74,7 @@ exports.updateBulkServiceHasThings = async (req, res) => {
         const updatedServiceHasThings = [];
 
         for (const serviceHasThingData of serviceHasThingsArray) {
-            const updatedServiceHasThing = await serviceHasThingsService.updateBulkServiceHasThing(
+            const updatedServiceHasThing = await serviceHasThingsService.updateBulkServiceHasSub(
                 serviceHasThingData.idServiceHasThing,
                 { ...serviceHasThingData, Service_idService: serviceId }
             );
@@ -90,9 +90,9 @@ exports.updateBulkServiceHasThings = async (req, res) => {
 
 
 
-exports.deleteServiceHasThing = async (req, res) => {
+exports.deleteServiceHasSub = async (req, res) => {
     try {
-        await serviceHasThingsService.deleteServiceHasThing(req.params.id);
+        await serviceHasThingsService.deleteServiceHasSub(req.params.id);
         res.status(204).send();
     } catch (error) {
         res.status(500).json({ error: error.message });
