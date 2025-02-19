@@ -30,6 +30,22 @@ exports.getServiceById = async (id, baseURL) => {
     };
 };
 
+
+exports.getServiceWithSubServices = async (serviceId) => {
+    const [serviceRows] = await db.query("SELECT * FROM services WHERE idService = ?", [serviceId]);
+    if (serviceRows.length === 0) return null; 
+    const service = serviceRows[0];
+
+    const [subServiceRows] = await db.query("SELECT * FROM Service_Has_Things WHERE Service_idService = ?", [serviceId]);
+
+    return {
+        ...service,
+        subServices: subServiceRows 
+    };
+};
+
+
+
 exports.updateService = async (id, serviceData) => {
     const { Name, Description, Image } = serviceData;
     await db.query(
