@@ -13,6 +13,8 @@ const productRoutes = require('./routes/productRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
 const serviceHasThingsRoutes = require('./routes/serviceHasSubRoutes');
 const customerRoutes = require('./routes/customerRoutes');
+const quoteRoutes = require('./routes/quoteRoutes');
+
 
 
 app.use(cors());
@@ -23,6 +25,7 @@ app.use('/productImages', express.static('productImages'));
 app.use('/api/services', serviceRoutes);
 app.use('/api/service-has-things', serviceHasThingsRoutes);
 app.use('/api/customers', customerRoutes);
+app.use('/api/quotes', quoteRoutes);
 
 
 
