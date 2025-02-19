@@ -1,20 +1,25 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const dotenv = require('dotenv');
-const productRoutes = require('./routes/productRoutes');
+const dotenv = require('dotenv')
 const db = require('./db/db');
 
 require('dotenv').config();
 dotenv.config();
 const app = express();
 
+
+const productRoutes = require('./routes/productRoutes');
+const serviceRoutes = require('./routes/serviceRoutes');
+const serviceHasThingsRoutes = require('./routes/serviceHasThingsRoutes');
+
 app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/api/products', productRoutes);
 app.use('/productImages', express.static('productImages'));
-
+app.use('/api/services', serviceRoutes);
+app.use('/api/service-has-things', serviceHasThingsRoutes);
 
 
 
