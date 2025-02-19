@@ -4,7 +4,7 @@ const productService = require('../services/productService');
 exports.getAllProducts = async (req, res) => {
     try {
         const baseURL = `${req.protocol}://${req.get("host")}/uploads/`;
-        const products = await productService.getAllProducts(baseURL); // Pass baseURL to service
+        const products = await productService.getAllProducts(baseURL); 
         res.json(products);
     } catch (error) {
         res.status(500).json({ error: error.message });
