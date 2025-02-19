@@ -41,12 +41,21 @@ exports.getServiceById = async (req, res) => {
 
 exports.updateService = async (req, res) => {
     try {
-        const updatedService = await serviceService.updateService(req.params.id, req.body);
+        const currentService = await serviceService.getServiceById(req.params.id);
+        
+        if (!currentService) {
+            return res.status(404).json({ message: "Service not found" });
+        }
+
+        const { Name, Description } = req.body;
+        const Image = req.file ? req.file.filename : currentService.Image; 
+        const updatedService = await serviceService.updateService(req.params.id, { Name, Description, Image });
         res.json(updatedService);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 };
+
 
 exports.deleteService = async (req, res) => {
     try {
