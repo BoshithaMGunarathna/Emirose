@@ -3,7 +3,7 @@ const db = require('../db/db');
 exports.createService = async (serviceData) => {
     const { Name, Description, Image } = serviceData;
     const [result] = await db.query(
-        "INSERT INTO Services (Name, Description, Image) VALUES (?, ?, ?)",
+        "INSERT INTO services (Name, Description, Image) VALUES (?, ?, ?)",
         [Name, Description, Image]
     );
 
@@ -11,7 +11,7 @@ exports.createService = async (serviceData) => {
 };
 
 exports.getAllServices = async (baseURL) => {
-    const [rows] = await db.query("SELECT * FROM Services");
+    const [rows] = await db.query("SELECT * FROM services");
 
     return rows.map(service => ({
         ...service,
@@ -20,7 +20,7 @@ exports.getAllServices = async (baseURL) => {
 };
 
 exports.getServiceById = async (id, baseURL) => {
-    const [rows] = await db.query("SELECT * FROM Services WHERE idService = ?", [id]);
+    const [rows] = await db.query("SELECT * FROM services WHERE idService = ?", [id]);
     if (rows.length === 0) return null;
 
     const service = rows[0];
@@ -33,13 +33,13 @@ exports.getServiceById = async (id, baseURL) => {
 exports.updateService = async (id, serviceData) => {
     const { Name, Description, Image } = serviceData;
     await db.query(
-        "UPDATE Services SET Name = ?, Description = ?, Image = ? WHERE idService = ?",
+        "UPDATE services SET Name = ?, Description = ?, Image = ? WHERE idService = ?",
         [Name, Description, Image, id]
     );
     return { id, ...serviceData };
 };
 
 exports.deleteService = async (id) => {
-    await db.query("DELETE FROM Services WHERE idService = ?", [id]);
+    await db.query("DELETE FROM services WHERE idService = ?", [id]);
     return { id };
 };
