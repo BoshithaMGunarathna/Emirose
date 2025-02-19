@@ -39,6 +39,24 @@ exports.getServiceById = async (req, res) => {
     }
 };
 
+
+exports.getServiceWithSubServices = async (req, res) => {
+    try {
+        const serviceId = req.params.serviceId;
+        const serviceWithSubServices = await serviceService.getServiceWithSubServices(serviceId);
+
+        if (!serviceWithSubServices) {
+            return res.status(404).json({ message: "Service not found" });
+        }
+
+        res.json(serviceWithSubServices);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+
+
 exports.updateService = async (req, res) => {
     try {
         const currentService = await serviceService.getServiceById(req.params.id);
