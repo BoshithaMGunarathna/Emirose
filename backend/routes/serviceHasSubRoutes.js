@@ -3,11 +3,11 @@ const serviceHasThingsController = require('../controllers/serviceHasSubControll
 
 const router = express.Router();
 
-router.post("/", serviceHasThingsController.createServiceHasThing);
-router.get("/:serviceId", serviceHasThingsController.getAllServiceHasThings);
-router.get("/thing/:id", serviceHasThingsController.getServiceHasThingById);
-router.put("/thing/:id", serviceHasThingsController.updateServiceHasThing);
-router.put("/:serviceId", serviceHasThingsController.updateBulkServiceHasThings);
-router.delete("/thing/:id", serviceHasThingsController.deleteServiceHasThing);
+router.post("/", serviceHasThingsController.createServiceHasSub);
+router.get("/:serviceId", serviceHasThingsController.getAllServiceHasSub);
+router.get("/thing/:id", serviceHasThingsController.getServiceHasSubById);
+router.put("/thing/:id", serviceHasThingsController.updateServiceHasSub);
+router.put("/:serviceId", serviceHasThingsController.updateBulkServiceHasSub);
+router.delete("/thing/:id", serviceHasThingsController.deleteServiceHasSub);
 
 module.exports = router;
