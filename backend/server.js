@@ -12,6 +12,8 @@ const app = express();
 const productRoutes = require('./routes/productRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
 const serviceHasThingsRoutes = require('./routes/serviceHasThingsRoutes');
+const customerRoutes = require('./routes/customerRoutes');
+
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -20,6 +22,7 @@ app.use('/api/products', productRoutes);
 app.use('/productImages', express.static('productImages'));
 app.use('/api/services', serviceRoutes);
 app.use('/api/service-has-things', serviceHasThingsRoutes);
+app.use('/api/customers', customerRoutes);
 
 
 
