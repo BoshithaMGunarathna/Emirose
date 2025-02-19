@@ -11,7 +11,7 @@ const app = express();
 
 const productRoutes = require('./routes/productRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
-const serviceHasThingsRoutes = require('./routes/serviceHasThingsRoutes');
+const serviceHasThingsRoutes = require('./routes/serviceHasSubRoutes');
 const customerRoutes = require('./routes/customerRoutes');
 
 
