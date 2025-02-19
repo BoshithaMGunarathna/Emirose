@@ -39,6 +39,7 @@ exports.updateService = async (id, serviceData) => {
     return { id, ...serviceData };
 };
 
+
 exports.deleteService = async (id) => {
     await db.query("DELETE FROM services WHERE idService = ?", [id]);
     return { id };
