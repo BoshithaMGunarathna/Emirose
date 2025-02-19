@@ -63,6 +63,7 @@ exports.updateProduct = async (id, product) => {
     return { id, ...product };
 };
 
+
 exports.deleteProduct = async (id) => {
     await db.query("DELETE FROM products WHERE idProduct=?", [id]);
     return { message: "Product deleted successfully" };
