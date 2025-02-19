@@ -1,6 +1,6 @@
 const db = require('../db/db');
 
-exports.createServiceHasThing = async (serviceHasThingData) => {
+exports.createServiceHasSub = async (serviceHasThingData) => {
     const { Name, Service_idService } = serviceHasThingData;
     const [result] = await db.query(
         "INSERT INTO Service_Has_Things (Name, Service_idService) VALUES (?, ?)",
@@ -11,7 +11,7 @@ exports.createServiceHasThing = async (serviceHasThingData) => {
 };
 
 
-exports.getAllServiceHasThings = async (serviceId) => {
+exports.getAllServiceHasSub = async (serviceId) => {
     try {
         const [rows] = await db.query("SELECT * FROM Service_Has_Things WHERE Service_idService = ?", [serviceId]);
         return rows;
@@ -20,7 +20,7 @@ exports.getAllServiceHasThings = async (serviceId) => {
     }
 };
 
-exports.getServiceHasThingById = async (id) => {
+exports.getServiceHasSubById = async (id) => {
     try {
         const [rows] = await db.query("SELECT * FROM Service_Has_Things WHERE idServiceHasThing = ?", [id]);
         if (rows.length === 0) return null;
@@ -31,7 +31,7 @@ exports.getServiceHasThingById = async (id) => {
 };
 
 // single sub service
-exports.updateServiceHasThing = async (id, serviceHasThingData) => {
+exports.updateServiceHasSub = async (id, serviceHasThingData) => {
     const { Name, Service_idService } = serviceHasThingData;
     const [result] = await db.query(
         "UPDATE Service_Has_Things SET Name = ?, Service_idService = ? WHERE idServiceHasThing = ?",
@@ -47,7 +47,7 @@ exports.updateServiceHasThing = async (id, serviceHasThingData) => {
 
 
 //bulk update
-exports.updateBulkServiceHasThing = async (id, serviceHasThingData) => {
+exports.updateBulkServiceHasSub = async (id, serviceHasThingData) => {
     const { Name, Service_idService } = serviceHasThingData;
     await db.query(
         "UPDATE Service_Has_Things SET Name = ?, Service_idService = ? WHERE idServiceHasThing = ?",
@@ -59,7 +59,7 @@ exports.updateBulkServiceHasThing = async (id, serviceHasThingData) => {
 
 
 
-exports.deleteServiceHasThing = async (id) => {
+exports.deleteServiceHasSub = async (id) => {
     await db.query("DELETE FROM Service_Has_Things WHERE idServiceHasThing = ?", [id]);
     return { id };
 };
