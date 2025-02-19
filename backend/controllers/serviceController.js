@@ -2,7 +2,14 @@ const serviceService = require('../services/serviceService');
 
 exports.createService = async (req, res) => {
     try {
-        const service = await serviceService.createService(req.body);
+        console.log(req.body);
+        const { Name, Description, Image } = req.body;
+
+        if (!Name || !Description || !Image) {
+            return res.status(400).json({ error: "Name, Description, and Image are required." });
+        }
+
+        const service = await serviceService.createService({ Name, Description, Image });
         res.status(201).json(service);
     } catch (error) {
         res.status(500).json({ error: error.message });
