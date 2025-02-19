@@ -50,12 +50,21 @@ exports.createProduct = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
     try {
-        const updatedProduct = await productService.updateProduct(req.params.id, req.body);
+        const currentProduct = await productService.getProductById(req.params.id);
+        
+        if (!currentProduct) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+        const { Name, Price, Discount } = req.body;
+        const image = req.file ? req.file.filename : currentProduct.image; 
+
+        const updatedProduct = await productService.updateProduct(req.params.id, { Name, image, Price, Discount });
         res.json(updatedProduct);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 };
+
 
 exports.deleteProduct = async (req, res) => {
     try {
