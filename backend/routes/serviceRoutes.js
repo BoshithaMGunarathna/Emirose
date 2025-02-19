@@ -1,9 +1,10 @@
 const express = require('express');
 const serviceController = require('../controllers/serviceController');
+const uploadServiceMiddleware = require("../middlewares/uploadServicesMiddleware");
 
 const router = express.Router();
 
-router.post("/", serviceController.createService);
+router.post("/", uploadServiceMiddleware.single("Image"), serviceController.createService);
 router.get("/", serviceController.getAllServices);
 router.get("/:id", serviceController.getServiceById);
 router.put("/:id", serviceController.updateService);
